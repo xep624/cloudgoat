@@ -41,35 +41,3 @@ resource "aws_iam_role_policy" "lambda_dynamo_iam_policy" {
 }
 EOF
 }
-
-resource "aws_iam_group" "pinpoint_group" {
-  name = "PinpointManagement"
-}
-
-resource "aws_iam_group_policy" "pinpoint_policy" {
-  name  = "pinpoint"
-  group = "${aws_iam_group.pinpoint_group.id}"
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "ses:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Action": "mobiletargeting:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Action": "mobileanalytics:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
-}
-EOF
-}
